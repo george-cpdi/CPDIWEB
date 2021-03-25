@@ -27,12 +27,16 @@ install_plugin Capistrano::SCM::Git
 #   https://github.com/capistrano/passenger
 #
 # require "capistrano/rvm"
- require "capistrano/rbenv"
+# require "capistrano/rbenv"
 # require "capistrano/chruby"
- require "capistrano/bundler"
-require "capistrano/rails"
+# require "capistrano/bundler"
+# require "capistrano/rails"
 # require "capistrano/rails/migrations"
 # require "capistrano/passenger"
 
+set :rbenv_type, :user
+set :rbenv_ruby, '3.0.0'
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
+
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} /usr/local/bin/rbenv exec"
